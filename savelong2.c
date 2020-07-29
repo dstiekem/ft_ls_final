@@ -83,12 +83,12 @@ int     savelong(t_node **head)
 
         blockcount = 0;
         tmp = *head;
-        while((*head) != NULL)
+        while(tmp != NULL)
         {
                 blockcount += (int)status.st_blocks;
                 /* ft_putstr("\n");
                 ft_putnbr(blockcount); */
-                if (stat((*head)->data, &status) == 0)
+                if (stat(tmp->data, &status) == 0)
                 {
                         buff = ft_strdup(apb(status.st_mode));
                         buff = ft_strjoin(buff, ft_itoa(status.st_nlink));
@@ -99,8 +99,8 @@ int     savelong(t_node **head)
                         
                         /* ft_strdel(&(*filen)->data); */
                         /* ft_putendl("EEEK"); */
-                        ft_strclr((*head)->data);
-                        (*head)->data = ft_strdup(buff);
+                        /* ft_strclr(tmp->data); */
+                        tmp->data = ft_strdup(buff);
                         /* ft_putendl(tmp->data); */
                 }
                 else
@@ -108,13 +108,13 @@ int     savelong(t_node **head)
                         continue ;
                 }
                 
-                (*head) = (*head)->next;
+                tmp = tmp->next;
         }
     /* addlinenode(&filen,  */
     /* (*filen) = (*filen)->next; */
-        /* total = makenode(ft_strjoin("total ", ft_itoa(blockcount)));
+        total = makenode(ft_strjoin("total ", ft_itoa(blockcount)));
         total->next = *head;
         head = &total;
-        *head = tmp; */
+        /* *head = tmp; */
         return(1);
 }
