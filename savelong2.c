@@ -39,10 +39,10 @@ char    *names(uid_t u, gid_t g)
 
 char    *apb(mode_t filemode)
 {
-        char strfm[11];
+        char *strfm;
         char *apb;
 
-        
+        strfm = ft_strnew(0);
       /*   (filemode & S_IFIFO) ? ft_strcat(strfm, "p") : ft_strcat(strfm, "-");
         (filemode & S_IFCHR) ? ft_strcat(strfm, "c") : ft_strcat(strfm, "-");
         
@@ -52,7 +52,7 @@ char    *apb(mode_t filemode)
         
         if(filemode & S_IFREG || filemode & S_IFDIR)
         {
-                (filemode & S_IFDIR) ? ft_strjoin(strfm, "d") : ft_strjoin(strfm, "-");
+                (filemode & S_IFDIR) ? (strfm = ft_strdup("d")) : (strfm = ft_strdup("-"));
                 (filemode & S_IRUSR) ? ft_strjoin(strfm, "r") : ft_strjoin(strfm, "-");
                 (filemode & S_IWUSR) ? ft_strjoin(strfm, "w") : ft_strjoin(strfm, "-");
                 (filemode & S_IXUSR) ? ft_strjoin(strfm, "x") : ft_strjoin(strfm, "-");
@@ -68,6 +68,7 @@ char    *apb(mode_t filemode)
         /* apb = ft_strdup(strfm); */
         
         apb = ft_strjoin(strfm, " ");
+        ft_putendl(apb);
         return(apb);
 }
 
@@ -115,6 +116,6 @@ int     savelong(t_node **head)
         total = makenode(ft_strjoin("total ", ft_itoa(blockcount)));
         total->next = *head;
         head = &total;
-        /* *head = tmp; */
+        *head = tmp;
         return(1);
 }
