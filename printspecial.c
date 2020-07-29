@@ -8,7 +8,6 @@ void    printspecial(t_node **head, char set)
 	tmp = (*head);
 	while (tmp)
 	{
-        /* ft_putendl("o"); */
         if (tmp == NULL)
             return ;
 		if (set == 'l')
@@ -17,7 +16,6 @@ void    printspecial(t_node **head, char set)
 			savelong(head);
 		}
 		ft_putendl(tmp->data);
-		/* ft_putendl("`P`"); */
 		/* free(tmp->data); */
 		tmp = tmp->next;
 		/* free(*head); */

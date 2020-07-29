@@ -38,12 +38,12 @@ char 	*saveflag(char *args)
 {
 	char *Rartl;
 	char *set;
-	int i;
+	size_t i;
 
 	i = 0;
 	set = ft_strnew(0);
 	Rartl = ft_strdup("Rartl");
-	while(args[i])
+	while(i < ft_strlen(Rartl))
 	{
 		if(ft_strchr(args, Rartl[i]) != NULL)
 		{
@@ -51,7 +51,7 @@ char 	*saveflag(char *args)
 		}
 		i++;
 	}
-	ft_strdel(&Rartl);
+	/* ft_strdel(&Rartl); */
 	return (set);
 }
 
@@ -136,7 +136,6 @@ int	main(int ac, char **av)
 		{
 			addnode(&head, makenode("."));
 		}
-		ft_putendl(set);
 		which = ft_ls(&head, &set);//return 0 if all is fine, return 3 if open fails, return 5 if memalloc fails anywhere.
 		scream(which, NULL);
 		/* system("leaks ft_ls"); */

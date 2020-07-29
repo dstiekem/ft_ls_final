@@ -3,7 +3,6 @@
 int     readthings(char *entry, char **set)
 {
     t_stuff this;
-
     if(openandread(entry, set) == 1)
     {
         return (0);
@@ -96,7 +95,6 @@ int     ft_ls(t_node **head, char **set)
             /* ft_putendl("ee");  */  
             if(readthings((*head)->data, set))
             {
-                /* ft_putendl("TT");  */ 
                 free((*head)->data);
             }
 		    *head = (*head)->next;
