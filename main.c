@@ -136,6 +136,7 @@ int	main(int ac, char **av)
 		{
 			addnode(&head, makenode("."));
 		}
+		ft_putendl(set);
 		which = ft_ls(&head, &set);//return 0 if all is fine, return 3 if open fails, return 5 if memalloc fails anywhere.
 		scream(which, NULL);
 		/* system("leaks ft_ls"); */

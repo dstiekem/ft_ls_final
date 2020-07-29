@@ -19,6 +19,9 @@
 # include <string.h>
 # include <sys/uio.h>
 
+
+char			ft_strchrchr(const char *s, int c);
+char			ft_strtochr(char *str);
 int				get_next_line(const int fd, char **line);
 size_t			ft_strlen(const char *str);
 size_t			ft_strnlen(const char *str, size_t maxlen);

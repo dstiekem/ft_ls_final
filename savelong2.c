@@ -74,44 +74,48 @@ char    *apb(mode_t filemode)
 int     savelong(t_node **head)
 {
     //print total of 512 bytes
-    t_node **tmp;
-    struct stat status;
-    char *buff;
+        t_node *tmp;
+        struct stat status;
+        char *buff;
   /*   char *otherbuff; */
-    int blockcount;
+        int blockcount;
         t_node *total;
 
         blockcount = 0;
-    tmp = head;
-    while((*head) != NULL)
-    {
-        blockcount += (int)status.st_blocks;
-        /* ft_putstr("\n");
-        ft_putnbr(blockcount); */
-        if (stat((*head)->data, &status) == -1)
+        tmp = *head;
+        while((*head) != NULL)
         {
-                continue;
+                blockcount += (int)status.st_blocks;
+                /* ft_putstr("\n");
+                ft_putnbr(blockcount); */
+                if (stat((*head)->data, &status) == 0)
+                {
+                        buff = ft_strdup(apb(status.st_mode));
+                        buff = ft_strjoin(buff, ft_itoa(status.st_nlink));
+                        buff = ft_strjoin(buff, names(status.st_uid, status.st_gid));
+                        buff = ft_strjoin(buff, ft_itoa(status.st_size));
+                        buff = ft_strjoin(buff, date(status));
+                        buff = ft_strjoin(buff, tmp->data);
+                        
+                        /* ft_strdel(&(*filen)->data); */
+                        /* ft_putendl("EEEK"); */
+                        ft_strclr((*head)->data);
+                        (*head)->data = ft_strdup(buff);
+                        ft_putendl(tmp->data);
+                }
+                
+                else
+                {
+                        continue ;
+                }
+                
+                (*head) = (*head)->next;
         }
-        
-        buff = ft_strdup(apb(status.st_mode));
-        buff = ft_strjoin(buff, ft_itoa(status.st_nlink));
-        buff = ft_strjoin(buff, names(status.st_uid, status.st_gid));
-        buff = ft_strjoin(buff, ft_itoa(status.st_size));
-        buff = ft_strjoin(buff, date(status));
-        buff = ft_strjoin(buff, (*tmp)->data);
-        
-        /* ft_strdel(&(*filen)->data); */
-        /* ft_putendl("EEEK"); */
-        (*head)->data = ft_strdup(buff);
-       /*  ft_putendl((*tmp)->data); */
-        (*head) = (*head)->next;
-        
-    }
     /* addlinenode(&filen,  */
     /* (*filen) = (*filen)->next; */
-    total = makenode(ft_strjoin("total ", ft_itoa(blockcount)));
+        total = makenode(ft_strjoin("total ", ft_itoa(blockcount)));
         total->next = *head;
-    *head = total;
-    head = tmp;
-    return(1);
+        head = &total;
+        *head = tmp;
+        return(1);
 }

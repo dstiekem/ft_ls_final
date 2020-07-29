@@ -24,7 +24,8 @@ FILES = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
 		ft_strsub.c ft_strtrim.c ft_tolower.c ft_putchar_fd.c ft_putnbr_fd.c\
 		ft_putstr_fd.c ft_putendl_fd.c ft_strsplit.c ft_iswhitespace.c\
 		ft_somespaces.c ft_wcount.c ft_wlen.c ft_digitcount.c get_next_line.c\
-		
+		ft_strtochr.c ft_strchrchr.c	
+
 OBJECTS = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o\
 		ft_isdigit.o ft_isprint.o ft_itoa.o ft_memalloc.o ft_memccpy.o\
 		ft_toupper.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memdel.o\
@@ -37,6 +38,7 @@ OBJECTS = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o\
 		ft_strsub.o ft_strtrim.o ft_tolower.o ft_putchar_fd.o ft_putnbr_fd.o\
 		ft_putstr_fd.o ft_putendl_fd.o ft_strsplit.o ft_iswhitespace.o\
 		ft_somespaces.o ft_wcount.o ft_wlen.o ft_digitcount.o get_next_line.o\
+		ft_strtochr.o ft_strchrchr.o
 
 CFLAGS = gcc -Wall -Werror -Wextra -c
 

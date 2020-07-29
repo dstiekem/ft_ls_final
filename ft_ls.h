@@ -34,7 +34,7 @@ void	addnode(t_node **head, t_node *newnode);
 t_node	*makenode(const char *data);
 int		openandread(char *entry, char **set);
 int     savelong(t_node **head);
-void    printspecial(t_node **head, char set);
+void    printspecial(t_node **head, char *set);
 int 	sort(t_node **dirhead, int count);
 int 	timebubble(t_node **dirhead, int count);
 int 	backtimebubble(t_node **dirhead, int count);
