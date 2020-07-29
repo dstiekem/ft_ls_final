@@ -6,6 +6,7 @@ int     scream(int which, char *args)
     {
         ft_putendl(args);
         ft_putendl("no such file or directory");
+        exit(1);
         return (1);
     }
     else if (which == 2)//illegal option end program MAIN;
