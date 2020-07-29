@@ -101,9 +101,8 @@ int     savelong(t_node **head)
                         /* ft_putendl("EEEK"); */
                         ft_strclr((*head)->data);
                         (*head)->data = ft_strdup(buff);
-                        ft_putendl(tmp->data);
+                        /* ft_putendl(tmp->data); */
                 }
-                
                 else
                 {
                         continue ;
@@ -113,9 +112,9 @@ int     savelong(t_node **head)
         }
     /* addlinenode(&filen,  */
     /* (*filen) = (*filen)->next; */
-        total = makenode(ft_strjoin("total ", ft_itoa(blockcount)));
+        /* total = makenode(ft_strjoin("total ", ft_itoa(blockcount)));
         total->next = *head;
         head = &total;
-        *head = tmp;
+        *head = tmp; */
         return(1);
 }
