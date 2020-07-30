@@ -1,6 +1,5 @@
 #include "ft_ls.h"
 
-
 char    *date(struct stat status)
 {
         char *date;
@@ -43,13 +42,6 @@ char    *apb(mode_t filemode)
         char *apb;
 
         strfm = ft_strnew(0);
-      /*   (filemode & S_IFIFO) ? ft_strcat(strfm, "p") : ft_strcat(strfm, "-");
-        (filemode & S_IFCHR) ? ft_strcat(strfm, "c") : ft_strcat(strfm, "-");
-        
-        (filemode & S_IFBLK) ? ft_strcat(strfm, "b") : ft_strcat(strfm, "-");
-        (filemode & S_IFLNK) ? ft_strcat(strfm, "l") : ft_strcat(strfm, "-");
-        (filemode & S_IFSOCK) ? ft_strcat(strfm, "s") : ft_strcat(strfm, "-"); */
-        
         if(filemode & S_IFREG || filemode & S_IFDIR)
         {
                 (filemode & S_IFDIR) ? (strfm = ft_strdup("d")) : (strfm = ft_strdup("-"));
@@ -63,33 +55,23 @@ char    *apb(mode_t filemode)
                 (filemode & S_IWOTH) ? (strfm = ft_strjoin(strfm, "w")) : (strfm = ft_strjoin(strfm, "-"));
                 (filemode & S_IXOTH) ? (strfm = ft_strjoin(strfm, "x")) : (strfm = ft_strjoin(strfm, "-"));   
         }
-        
-        /* apb = ft_strdup(strfm); */
-        
         apb = ft_strjoin(strfm, " ");
-        /* ft_putendl(apb); */
         return(apb);
 }
 
 int     savelong(t_node **head, char **entry)
 {
-        
-    //print total of 512 bytes
         t_node *tmp;
         struct stat status;
         char *buff;
-  /*   char *otherbuff; */
         int blockcount;
         t_node *total;
         char *news;
 
         blockcount = 0;
         tmp = *head;
-        
         while(tmp != NULL)
         {
-                /* ft_putstr("\n");
-                ft_putnbr(blockcount); */
                 news = ft_strnew(0);
                 news = ft_strjoin(*entry, ft_strjoin("/", (tmp->data)));
                 if (stat(news, &status) == -1)
@@ -103,23 +85,12 @@ int     savelong(t_node **head, char **entry)
                 buff = ft_strjoin(buff, ft_itoa(status.st_size));
                 buff = ft_strjoin(buff, date(status));
                 buff = ft_strjoin(buff, tmp->data);
-                
-                /* ft_strdel(&(*filen)->data); */
-                /* ft_putendl("EEEK"); */
-                /* ft_strclr(tmp->data); */
                 tmp->data = ft_strdup(buff);
-                /* ft_putendl(tmp->data); */
-                
-                tmp = tmp->next;
-                
+                tmp = tmp->next;  
         }
-    /* addlinenode(&filen,  */
-    /* (*filen) = (*filen)->next; */
         total = makenode(ft_strjoin("total ", ft_itoa(blockcount)));
         total->next = *head;
         head = &total;
         ft_putendl(total->data);
-        /* *head = tmp; */
-
         return(1);
 }

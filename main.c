@@ -51,7 +51,7 @@ char 	*saveflag(char *args)
 		}
 		i++;
 	}
-	/* ft_strdel(&Rartl); */
+	ft_strdel(&Rartl);
 	return (set);
 }
 
@@ -63,7 +63,6 @@ int		is_ent(char **args, t_node **head, int *which)
 		if(st.st_mode & S_IFREG || st.st_mode & S_IFDIR)
 		{
 			addnode(head, makenode(*args));
-			/* ft_putendl(*args); */
 			which = 0;
 			return(1);
 		}
@@ -136,7 +135,7 @@ int	main(int ac, char **av)
 		{
 			addnode(&head, makenode("."));
 		}
-		ft_putendl(set);
+		/* ft_putendl(set); */
 		which = ft_ls(&head, &set);//return 0 if all is fine, return 3 if open fails, return 5 if memalloc fails anywhere.
 		scream(which, NULL);
 		/* system("leaks ft_ls"); */
