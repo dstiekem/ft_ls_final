@@ -1,5 +1,5 @@
 #include "ft_ls.h"
-int    printspecial(t_node **head, char *set)
+int    printspecial(t_node **head, char *set, char **entry)
 {
     t_node *tmp;
 	t_stuff check;
@@ -7,7 +7,7 @@ int    printspecial(t_node **head, char *set)
 	if (ft_strchrchr(set, 'l') == 'l')
 	{
 		/* savelong(head, set); */
-		savelong(head);
+		savelong(head, entry);
 		/*ft_putendl((*head)->data); */
 	}
 	tmp = (*head);

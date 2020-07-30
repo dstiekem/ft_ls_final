@@ -72,7 +72,7 @@ int opensort(char **entry, t_node **filen, char **set, int count)
         {
             backbubble(filen, count);
         }
-        if(printspecial(filen, *set))
+        if(printspecial(filen, *set, entry))
         {
             if(!traverselstdir(entry, filen, set))
             {
@@ -82,7 +82,7 @@ int opensort(char **entry, t_node **filen, char **set, int count)
     }
     else
     {
-        if(printspecial(filen, *set))
+        if(printspecial(filen, *set, entry))
             return (1);
     }
     return (1);

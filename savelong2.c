@@ -71,8 +71,9 @@ char    *apb(mode_t filemode)
         return(apb);
 }
 
-int     savelong(t_node **head)
+int     savelong(t_node **head, char **entry)
 {
+        
     //print total of 512 bytes
         t_node *tmp;
         struct stat status;
@@ -80,35 +81,37 @@ int     savelong(t_node **head)
   /*   char *otherbuff; */
         int blockcount;
         t_node *total;
+        char *news;
 
         blockcount = 0;
         tmp = *head;
+        
         while(tmp != NULL)
         {
-                blockcount += (int)status.st_blocks;
                 /* ft_putstr("\n");
                 ft_putnbr(blockcount); */
-                if (stat(tmp->data, &status) == 0)
-                {
-                        buff = ft_strdup(apb(status.st_mode));
-                        buff = ft_strjoin(buff, ft_itoa(status.st_nlink));
-                        buff = ft_strjoin(buff, names(status.st_uid, status.st_gid));
-                        buff = ft_strjoin(buff, ft_itoa(status.st_size));
-                        buff = ft_strjoin(buff, date(status));
-                        buff = ft_strjoin(buff, tmp->data);
-                        
-                        /* ft_strdel(&(*filen)->data); */
-                        /* ft_putendl("EEEK"); */
-                        /* ft_strclr(tmp->data); */
-                        tmp->data = ft_strdup(buff);
-                        /* ft_putendl(tmp->data); */
-                }
-                else
+                news = ft_strnew(0);
+                news = ft_strjoin(*entry, ft_strjoin("/", (tmp->data)));
+                if (stat(news, &status) == -1)
                 {
                         continue ;
                 }
+                blockcount += (int)status.st_blocks;
+                buff = ft_strdup(apb(status.st_mode));
+                buff = ft_strjoin(buff, ft_itoa(status.st_nlink));
+                buff = ft_strjoin(buff, names(status.st_uid, status.st_gid));
+                buff = ft_strjoin(buff, ft_itoa(status.st_size));
+                buff = ft_strjoin(buff, date(status));
+                buff = ft_strjoin(buff, tmp->data);
+                
+                /* ft_strdel(&(*filen)->data); */
+                /* ft_putendl("EEEK"); */
+                /* ft_strclr(tmp->data); */
+                tmp->data = ft_strdup(buff);
+                /* ft_putendl(tmp->data); */
                 
                 tmp = tmp->next;
+                
         }
     /* addlinenode(&filen,  */
     /* (*filen) = (*filen)->next; */
