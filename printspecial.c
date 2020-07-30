@@ -1,5 +1,5 @@
 #include "ft_ls.h"
-void    printspecial(t_node **head, char *set)
+int    printspecial(t_node **head, char *set)
 {
     t_node *tmp;
 	t_stuff check;
@@ -14,7 +14,7 @@ void    printspecial(t_node **head, char *set)
 	while (tmp)
 	{
         if (tmp == NULL)
-            return ;
+            return (0);
 		ft_putendl(tmp->data);
 		/* free(tmp->data); */
 		tmp = tmp->next;
@@ -25,4 +25,5 @@ void    printspecial(t_node **head, char *set)
 	/* ft_putendl(tmp->data); */
 /* 	free(tmp->data);
 	free(*head);*/
+	return (1);
 } 

@@ -53,22 +53,21 @@ char    *apb(mode_t filemode)
         if(filemode & S_IFREG || filemode & S_IFDIR)
         {
                 (filemode & S_IFDIR) ? (strfm = ft_strdup("d")) : (strfm = ft_strdup("-"));
-                (filemode & S_IRUSR) ? ft_strjoin(strfm, "r") : ft_strjoin(strfm, "-");
-                (filemode & S_IWUSR) ? ft_strjoin(strfm, "w") : ft_strjoin(strfm, "-");
-                (filemode & S_IXUSR) ? ft_strjoin(strfm, "x") : ft_strjoin(strfm, "-");
-                (filemode & S_IRGRP) ? ft_strjoin(strfm, "r") : ft_strjoin(strfm, "-");
-                (filemode & S_IWGRP) ? ft_strjoin(strfm, "w") : ft_strjoin(strfm, "-");
-                (filemode & S_IXGRP) ? ft_strjoin(strfm, "x") : ft_strjoin(strfm, "-");
-                (filemode & S_IROTH) ? ft_strjoin(strfm, "r") : ft_strjoin(strfm, "-");
-                (filemode & S_IWOTH) ? ft_strjoin(strfm, "w") : ft_strjoin(strfm, "-");
-                (filemode & S_IXOTH) ? ft_strjoin(strfm, "x") : ft_strjoin(strfm, "-");
-                
+                (filemode & S_IRUSR) ? (strfm = ft_strjoin(strfm, "r")) : (strfm = ft_strjoin(strfm, "-"));
+                (filemode & S_IWUSR) ? (strfm = ft_strjoin(strfm, "w")) : (strfm = ft_strjoin(strfm, "-"));
+                (filemode & S_IXUSR) ? (strfm = ft_strjoin(strfm, "x")) : (strfm = ft_strjoin(strfm, "-"));
+                (filemode & S_IRGRP) ? (strfm = ft_strjoin(strfm, "r")) : (strfm = ft_strjoin(strfm, "-"));
+                (filemode & S_IWGRP) ? (strfm = ft_strjoin(strfm, "w")) : (strfm = ft_strjoin(strfm, "-"));
+                (filemode & S_IXGRP) ? (strfm = ft_strjoin(strfm, "x")) : (strfm = ft_strjoin(strfm, "-"));
+                (filemode & S_IROTH) ? (strfm = ft_strjoin(strfm, "r")) : (strfm = ft_strjoin(strfm, "-"));
+                (filemode & S_IWOTH) ? (strfm = ft_strjoin(strfm, "w")) : (strfm = ft_strjoin(strfm, "-"));
+                (filemode & S_IXOTH) ? (strfm = ft_strjoin(strfm, "x")) : (strfm = ft_strjoin(strfm, "-"));   
         }
         
         /* apb = ft_strdup(strfm); */
         
         apb = ft_strjoin(strfm, " ");
-        ft_putendl(apb);
+        /* ft_putendl(apb); */
         return(apb);
 }
 
@@ -116,6 +115,8 @@ int     savelong(t_node **head)
         total = makenode(ft_strjoin("total ", ft_itoa(blockcount)));
         total->next = *head;
         head = &total;
-        *head = tmp;
+        ft_putendl(total->data);
+        /* *head = tmp; */
+
         return(1);
 }
