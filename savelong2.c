@@ -59,7 +59,7 @@ char    *apb(mode_t filemode)
         return(apb);
 }
 
-int     savelong(t_node **head, char **entry)
+t_node    *savelong(t_node *head, char **entry)
 {
         t_node *tmp;
         struct stat status;
@@ -69,7 +69,7 @@ int     savelong(t_node **head, char **entry)
         char *news;
 
         blockcount = 0;
-        tmp = *head;
+        tmp = head;
         while(tmp != NULL)
         {
                 news = ft_strnew(0);
@@ -89,8 +89,8 @@ int     savelong(t_node **head, char **entry)
                 tmp = tmp->next;  
         }
         total = makenode(ft_strjoin("total ", ft_itoa(blockcount)));
-        total->next = *head;
-        head = &total;
+        total->next = head;
+        /* head = &total; */
         ft_putendl(total->data);
-        return(1);
+        return(total);
 }

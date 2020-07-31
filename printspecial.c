@@ -7,20 +7,33 @@ int    printspecial(t_node **head, char *set, char **entry)
 	if (ft_strchrchr(set, 'l') == 'l')
 	{
 		/* savelong(head, set); */
-		savelong(head, entry);
-		/*ft_putendl((*head)->data); */
+		tmp = savelong(*head, entry);
+		while (tmp)
+		{
+			if (tmp == NULL)
+				return (0);
+			ft_putendl(tmp->data);
+			/* free(tmp->data); */
+			tmp = tmp->next;
+			/* free(*head); */
+			/* (*head) = tmp; */
+			
+		}
 	}
-	tmp = (*head);
-	while (tmp)
+	else
 	{
-        if (tmp == NULL)
-            return (0);
-		ft_putendl(tmp->data);
-		/* free(tmp->data); */
-		tmp = tmp->next;
-		/* free(*head); */
-		/* (*head) = tmp; */
-		
+		tmp = (*head);
+		while (tmp)
+		{
+			if (tmp == NULL)
+				return (0);
+			ft_putendl(tmp->data);
+			/* free(tmp->data); */
+			tmp = tmp->next;
+			/* free(*head); */
+			/* (*head) = tmp; */
+			
+		}
 	}
 	/* ft_putendl(tmp->data); */
 /* 	free(tmp->data);

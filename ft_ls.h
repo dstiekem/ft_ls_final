@@ -33,7 +33,7 @@ int     ft_ls(t_node **head, char **set);
 void	addnode(t_node **head, t_node *newnode);
 t_node	*makenode(const char *data);
 int		openandread(char *entry, char **set);
-int     savelong(t_node **head, char **entry);
+t_node  *savelong(t_node *head, char **entry);
 int	    printspecial(t_node **head, char *set, char **entry);
 int 	sort(t_node **dirhead, int count);
 int 	timebubble(t_node **dirhead, int count);
