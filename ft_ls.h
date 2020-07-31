@@ -39,5 +39,6 @@ int 	sort(t_node **dirhead, int count);
 int 	timebubble(t_node **dirhead, int count);
 int 	backtimebubble(t_node **dirhead, int count);
 int 	backbubble(t_node **dirhead, int count);
+t_node 	*copyist(t_node **head);
 
 #endif

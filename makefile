@@ -2,7 +2,7 @@ NAME = ft_ls
 FLAGS = -Wall -Werror -Wextra
 HEADER = ft_ls.h
 LIB = libft/libft.a
-SRC = printspecial.c addnode.c makenode.c sort.c main.c scream.c ft_ls.c recurse4.c savelong2.c
+SRC = printspecial.c addnode.c makenode.c sort.c main.c scream.c ft_ls.c recurse4.c savelong2.c copyist.c
 # savelong2.c
 
 all: $(NAME)

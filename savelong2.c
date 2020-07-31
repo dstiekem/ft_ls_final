@@ -69,11 +69,13 @@ t_node    *savelong(t_node *head, char **entry)
         char *news;
 
         blockcount = 0;
-        tmp = head;
+        tmp = copyist(&head);
+        total = tmp;
         while(tmp != NULL)
         {
                 news = ft_strnew(0);
                 news = ft_strjoin(*entry, ft_strjoin("/", (tmp->data)));
+                /* ft_putendl(news); */
                 if (stat(news, &status) == -1)
                 {
                         continue ;
@@ -86,11 +88,13 @@ t_node    *savelong(t_node *head, char **entry)
                 buff = ft_strjoin(buff, date(status));
                 buff = ft_strjoin(buff, tmp->data);
                 tmp->data = ft_strdup(buff);
+                /* ft_putendl(tmp->data); */
                 tmp = tmp->next;  
         }
+        tmp = total;
         total = makenode(ft_strjoin("total ", ft_itoa(blockcount)));
-        total->next = head;
+        total->next = tmp;
         /* head = &total; */
-        ft_putendl(total->data);
+        /* ft_putendl(total->data); */
         return(total);
 }
