@@ -36,8 +36,8 @@ int		openandread(char *entry, char **set);
 t_node  *savelong(t_node *head, char **entry);
 int	    printspecial(t_node **head, char *set, char **entry);
 int 	sort(t_node **dirhead, int count);
-int 	timebubble(t_node **dirhead, int count);
-int 	backtimebubble(t_node **dirhead, int count);
+int 	timebubble(t_node **dirhead, int count, char **entry);
+int 	backtimebubble(t_node **dirhead, int count, char **entry);
 int 	backbubble(t_node **dirhead, int count);
 t_node 	*copyist(t_node **head);
 

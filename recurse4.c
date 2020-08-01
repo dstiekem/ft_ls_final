@@ -62,10 +62,10 @@ int opensort(char **entry, t_node **filen, char **set, int count)
     {
         if (ft_strchr(*set, 't') != NULL)
         {
-            timebubble(filen, count);
+            timebubble(filen, count, entry);
             if (ft_strchr(*set, 'r') != NULL)
             {
-                backtimebubble(filen, count);
+                backtimebubble(filen, count, entry);
             }
         }
         else if(ft_strchr(*set, 't') == NULL && ft_strchr(*set, 'r') != NULL)

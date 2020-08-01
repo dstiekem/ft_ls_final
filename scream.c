@@ -4,9 +4,11 @@ int     scream(int which, char *args)
 {
     if(which == 1)//MAIN
     {
-        ft_putendl(args);
+        ft_putstr("ft_ls: ");
+        ft_putstr(args);
+        ft_putstr(": ");
         ft_putendl("no such file or directory");
-        exit(1);
+       /*  exit(1); */
         return (1);
     }
     else if (which == 2)//illegal option end program MAIN;
@@ -15,6 +17,7 @@ int     scream(int which, char *args)
         ft_putstr("ft_ls: -- ");
         ft_putstr(args);
         ft_putstr(" illegal option");
+        exit(0);
         return (0);
     }
     else if (which == 3)//handled in opendir FT_LS
@@ -22,22 +25,26 @@ int     scream(int which, char *args)
         ft_putstr("ft_ls: cannot open directory \'");
         ft_putstr(args);
         ft_putstr("\': Permission denied");
+        exit(0);
         return (0);
     }
     else if(which == 4)//MAIN before everything else
     {
 
         ft_putendl("ft_ls: arg list too long");
+        exit(0);
         return (0);
     }
     else if(which == 5)//handled in opendir FT_LS
     {
         ft_putendl("ft_ls: cannot allocate memory");
+        exit(0);
         return (0);
     }
     else if(which == 6)//MAIN befroe everything else
     {
         ft_putendl("ft_ls: filename too long");
+        exit(0);
         return (0);
     }
     else if(which == 0)
