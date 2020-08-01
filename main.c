@@ -34,10 +34,11 @@ char *is_flag(char *args, int *which)
 	return (&args[i]);
 }
 
-char 	*saveflag(char *args)
+char 	*saveflag(char *args, char *set_value)
 {
 	char *Rartl;
 	char *set;
+	static char *temp = NULL;
 	size_t i;
 
 	i = 0;
@@ -47,29 +48,37 @@ char 	*saveflag(char *args)
 	{
 		if(ft_strchr(args, Rartl[i]) != NULL)
 		{
-			set = ft_strjoin(set, ft_strsub(&Rartl[i], 0, 1));
+			temp = ft_strjoin(set_value, ft_strsub(Rartl, i, 1));
+			set = ft_strsub(Rartl, i, 1);
+			/* ft_putendl(set); */
 		}
 		i++;
 	}
+	ft_putendl("_______________");
+	ft_putendl(temp);
+	ft_putendl("---------------");
 	ft_strdel(&Rartl);
 	return (set);
 }
 
-int		is_ent(char **args, t_node **head, int *which)
+int		is_ent(char **args, t_node **head, int *which, char **set)
 {
 	struct stat st;
-	if(stat(*args, &st) == 0)
+	int	temp;
+	if((temp = stat(*args, &st) == 0)) //if the dir exsist
 	{
 		if(st.st_mode & S_IFREG || st.st_mode & S_IFDIR)
 		{
 			addnode(head, makenode(*args));
-			which = 0;
+			*which = 0;
 			return(1);
 		}
 	}
-	else
+	if (!temp)
 	{
-		*which = 1;
+		(void)set;
+		// if(*set == NULL) //set if there is no flag
+			*which = 1;
 		return(0);
 	}
 	return(0);
@@ -82,12 +91,14 @@ int	main(int ac, char **av)
 	int which;
 	t_node *head;
 	int	optclosed;
+	char *temp;
 
 	optclosed = 0;
 	i = 1;
 	head = NULL;
-	set = ft_strnew(0);
+	set = NULL;
 	which = 0;
+	temp = NULL;
 	
 	if(ac < 262144)
 	{
@@ -99,7 +110,9 @@ int	main(int ac, char **av)
 			{
 				if(is_flag(av[i], &which) == NULL && optclosed == 0)
 				{
-					set = saveflag(av[i]);
+					// temp = ft_strjoin(temp, saveflag(av[i]));
+					set = saveflag(av[i], set);
+					ft_putendl(set);
 					i++;
 				}
 				else if(is_flag(av[i], &which) != NULL)
@@ -115,27 +128,28 @@ int	main(int ac, char **av)
 				{
 					av[i] = set;
 				}
-				if(!scream(which, av[i]))
-				{
-					/* ft_strdel(&set); */
-					/* system("leaks ft_ls"); */
-					return(0);
-				}
-				else if(scream(which, av[i]))
+				// if(!scream(which, av[i]))
+				// {
+				// 	/* ft_strdel(&set); */
+				// 	/* system("leaks ft_ls"); */
+				// 	return(0);
+				// }
+				if(scream(which, av[i]))
 					i++;
 			}
-			if(is_ent(&av[i], &head, &which))
+			if(is_ent(&av[i], &head, &which, &set))
 			{
 				i++;
 				if (optclosed == 0)
 					optclosed = 1;
 			}	
 		}
-		if(head == NULL)
+		if(head == NULL && (which != 1 || set != NULL))
 		{
 			addnode(&head, makenode("."));
 		}
-		/* ft_putendl(set); */
+		ft_putnbr(which);
+		ft_putendl(set);
 		which = ft_ls(&head, &set);//return 0 if all is fine, return 3 if open fails, return 5 if memalloc fails anywhere.
 		scream(which, NULL);
 		/* system("leaks ft_ls"); */
