@@ -34,34 +34,27 @@ char *is_flag(char *args, int *which)
 	return (&args[i]);
 }
 
-char 	*saveflag(char *args, char *set_value)
+char 	*saveflag(char *args)
 {
 	char *Rartl;
-	char *set;
-	static char *temp = NULL;
+	static char *set = "";
 	size_t i;
 
 	i = 0;
-	set = ft_strnew(0);
 	Rartl = ft_strdup("Rartl");
 	while(i < ft_strlen(Rartl))
 	{
 		if(ft_strchr(args, Rartl[i]) != NULL)
-		{
-			temp = ft_strjoin(set_value, ft_strsub(Rartl, i, 1));
-			set = ft_strsub(Rartl, i, 1);
-			/* ft_putendl(set); */
+		{	
+			set = ft_strjoin(set, ft_strsub(Rartl, i, 1));
 		}
 		i++;
 	}
-	ft_putendl("_______________");
-	ft_putendl(temp);
-	ft_putendl("---------------");
 	ft_strdel(&Rartl);
 	return (set);
 }
 
-int		is_ent(char **args, t_node **head, int *which, char **set)
+int		is_ent(char **args, t_node **head, int *which)
 {
 	struct stat st;
 	int	temp;
@@ -76,7 +69,6 @@ int		is_ent(char **args, t_node **head, int *which, char **set)
 	}
 	if (!temp)
 	{
-		(void)set;
 		// if(*set == NULL) //set if there is no flag
 			*which = 1;
 		return(0);
@@ -91,14 +83,12 @@ int	main(int ac, char **av)
 	int which;
 	t_node *head;
 	int	optclosed;
-	char *temp;
 
 	optclosed = 0;
 	i = 1;
 	head = NULL;
 	set = NULL;
 	which = 0;
-	temp = NULL;
 	
 	if(ac < 262144)
 	{
@@ -110,9 +100,7 @@ int	main(int ac, char **av)
 			{
 				if(is_flag(av[i], &which) == NULL && optclosed == 0)
 				{
-					// temp = ft_strjoin(temp, saveflag(av[i]));
-					set = saveflag(av[i], set);
-					ft_putendl(set);
+					set = saveflag(av[i]);
 					i++;
 				}
 				else if(is_flag(av[i], &which) != NULL)
@@ -137,7 +125,7 @@ int	main(int ac, char **av)
 				if(scream(which, av[i]))
 					i++;
 			}
-			if(is_ent(&av[i], &head, &which, &set))
+			if(is_ent(&av[i], &head, &which))
 			{
 				i++;
 				if (optclosed == 0)
@@ -148,8 +136,6 @@ int	main(int ac, char **av)
 		{
 			addnode(&head, makenode("."));
 		}
-		ft_putnbr(which);
-		ft_putendl(set);
 		which = ft_ls(&head, &set);//return 0 if all is fine, return 3 if open fails, return 5 if memalloc fails anywhere.
 		scream(which, NULL);
 		/* system("leaks ft_ls"); */
