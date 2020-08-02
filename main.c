@@ -24,7 +24,10 @@ char *is_flag(char *args, int *which)
 			i++;
 		}
 		if (i - 1 == ft_strlen(args))
+		{
+			*which = 7;
 			return NULL;
+		}
 		else if (i - 1 < ft_strlen(args))
 		{
 			*which = 2;
@@ -63,7 +66,7 @@ int		is_ent(char **args, t_node **head, int *which)
 		if(st.st_mode & S_IFREG || st.st_mode & S_IFDIR)
 		{
 			addnode(head, makenode(*args));
-			which = 0;
+			*which = 0;
 			return(1);
 		}
 	}
@@ -86,7 +89,7 @@ int	main(int ac, char **av)
 	optclosed = 0;
 	i = 1;
 	head = NULL;
-	set = ft_strnew(0);
+	set = NULL;
 	which = 0;
 	
 	if(ac < 262144)
@@ -121,24 +124,29 @@ int	main(int ac, char **av)
 				{
 					/* ft_strdel(&set); */
 					/* system("leaks ft_ls"); */
+					ft_putendl("here?");
+					exit(1);
 					return(0);
 				}
-				
+				i++;
 			}
 			if(is_ent(&av[i], &head, &which))
 			{
 				if (optclosed == 0)
 					optclosed = 1;
+				i++;
 			}	
-			else if(!(is_ent(&av[i], &head, &which)))
+			else if (!(is_ent(&av[i], &head, &which)))
 			{
 				if (optclosed == 0)
 					optclosed = 1;
 			}
-			i++;
+			
 		}
-		if(head == NULL && optclosed == 1)
+		if(head == NULL && which == 7)
 		{
+			ft_putnbr(optclosed);
+			ft_putnbr(which);
 			addnode(&head, makenode("."));
 		}
 		
