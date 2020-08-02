@@ -100,20 +100,21 @@ int	main(int ac, char **av)
 				if(is_flag(av[i], &which) == NULL && optclosed == 0)
 				{
 					set = saveflag(av[i]);
-					i++;
 				}
-				else if(is_flag(av[i], &which) != NULL)
+				else if(is_flag(av[i], &which) != NULL && optclosed == 0)
 				{
 					set = is_flag(av[i], &which);
-					optclosed = 1;
+
 					break ;//or ISNT FLAG ha!
 				}
+				i++;
 			}
 			if(which != 0)
 			{
 				if(which == 2)
 				{
 					av[i] = set;
+					/* ft_putendl(av[i]); */
 				}
 				if(!scream(which, av[i]))
 				{
@@ -121,28 +122,32 @@ int	main(int ac, char **av)
 					/* system("leaks ft_ls"); */
 					return(0);
 				}
-				else if(scream(which, av[i]))
-					i++;
+				
 			}
 			if(is_ent(&av[i], &head, &which))
 			{
-				i++;
 				if (optclosed == 0)
 					optclosed = 1;
 			}	
+			else if(!(is_ent(&av[i], &head, &which)))
+			{
+				if (optclosed == 0)
+					optclosed = 1;
+			}
+			i++;
 		}
-		if(head == NULL)
+		if(head == NULL && optclosed == 1)
 		{
 			addnode(&head, makenode("."));
 		}
-		/* ft_putendl(set); */
+		
 		which = ft_ls(&head, &set);//return 0 if all is fine, return 3 if open fails, return 5 if memalloc fails anywhere.
 		scream(which, NULL);
 		/* system("leaks ft_ls"); */
 		return (0);
 	}
 	else
-		scream(4, NULL);
+		/* scream(4, NULL); */
 	ft_strdel(&set);
 	/* system("leaks ft_ls"); */
 	return (0);
