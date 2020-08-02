@@ -1,0 +1,14 @@
+
+working
+./ft_ls -a -r -t ./libft -l -R
+./ft_ls -a -r -t -sdcA -l -R
+./ft_ls -a -r -t -A -l -R
+./ft_ls -a -r -t -l -R ./libft ft_ls.dSYM ../ft_ls_final
+./ft_ls -artlR ./libft
+./ft_ls -r
+./ft_ls -t 
+./ft_ls -R 
+./ft_ls -a
+
+not working
+./ft_ls 
