@@ -99,10 +99,11 @@ int	main(int ac, char **av)
 			{
 				if(is_flag(av[i], &which) == NULL && optclosed == 0)
 				{
-					set = saveflag(av[i]);
+					set = ft_strjoin(set, saveflag(av[i]));
 				}
-				else if(is_flag(av[i], &which) != NULL && optclosed == 0)
+				else 
 				{
+					/*if(is_flag(av[i], &which) != NULL && optclosed == 0)*/
 					set = is_flag(av[i], &which);
 
 					break ;//or ISNT FLAG ha!
