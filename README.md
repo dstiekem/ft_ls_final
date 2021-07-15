@@ -4,3 +4,4 @@
 The project facilitated the learning and application of concepts like recursion, linked lists and sorting algorithms. 
 It also further advanced the ability to parse input and apply any or all of the flags.
 
+currently prints env variables....not sure why
